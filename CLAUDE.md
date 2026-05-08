@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Repository Purpose
 
 A growing collection of Claude-built React components ("artifacts"), served through a Vite + React dashboard hosted on GitHub Pages. Each artifact is a standalone `.jsx` file at the repo root; the `src/` directory is the dashboard app that indexes and renders them.
@@ -32,7 +30,6 @@ Each `.jsx` file is a self-contained React component:
 - Exports a default component
 - Inline styles only (JS style objects) — no CSS files, no Tailwind, no CSS modules
 - No dependencies beyond React itself
-- State is local; no persistence
 
 ### Adding an Artifact
 
