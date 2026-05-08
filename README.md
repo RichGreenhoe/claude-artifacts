@@ -2,11 +2,11 @@
 
 A growing collection of interactive tools and calculators built with Claude — each a self-contained React component.
 
-The dashboard is a Vite + React app deployed automatically to GitHub Pages via GitHub Actions on every push to `main`.
+The dashboard is a Vite + React app deployed automatically to GitHub Pages via GitHub Actions on every push to `main`. Clicking a card renders the live artifact in-app; a floating **← Dashboard** pill navigates back.
 
 ## Live Site
 
-[richgreenhoe.github.io/claude-artifacts](https://richgreenhoe.github.io/claude-artifacts)
+**[richgreenhoe.github.io/claude-artifacts](https://richgreenhoe.github.io/claude-artifacts)**
 
 ## Artifacts
 
@@ -18,22 +18,19 @@ The dashboard is a Vite + React app deployed automatically to GitHub Pages via G
 
 ```bash
 npm install
-npm run dev      # local dev server
+npm run dev      # http://localhost:5173/
 npm run build    # production build → dist/
 ```
 
 ## GitHub Pages Setup
 
 1. Push this repo to GitHub.
-2. Go to **Settings → Pages**.
-3. Under **Source**, select **GitHub Actions**.
-4. Push any commit to `main` — the Actions workflow builds and deploys automatically.
-
-The live URL will be `https://richgreenhoe.github.io/claude-artifacts`.
+2. Go to **Settings → Pages → Source → GitHub Actions**.
+3. Push any commit to `main` — the workflow builds and deploys automatically.
 
 ## Adding an Artifact
 
-1. Add the `.jsx` file to the repo root.
-2. Add an entry to `src/artifacts.js`.
-3. Add a row to the table above.
-4. Commit and push — the dashboard redeploys automatically.
+1. Add the `.jsx` file to the repo root. It must export a default React component.
+2. Add an entry to `src/artifacts.js` — slug, title, description, icon, tags, and a `lazy()` import.
+3. Add a row to the Artifacts table above.
+4. Commit and push.
