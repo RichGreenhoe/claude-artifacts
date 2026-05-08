@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import artifacts from "./artifacts";
 import styles from "./App.module.css";
 
@@ -66,7 +67,7 @@ function Card({ artifact }) {
   }, []);
 
   return (
-    <a ref={ref} className={styles.card} href={artifact.href} target="_blank" rel="noopener">
+    <Link ref={ref} className={styles.card} to={`/${artifact.slug}`}>
       <div className={styles.cardArrow}><ArrowIcon /></div>
       <div className={styles.cardIcon}>{artifact.icon}</div>
       <div className={styles.cardTitle}>{artifact.title}</div>
@@ -77,7 +78,7 @@ function Card({ artifact }) {
         ))}
         <span className={styles.tag}>React</span>
       </div>
-    </a>
+    </Link>
   );
 }
 
