@@ -1,8 +1,8 @@
 # Claude Artifacts
 
-A growing collection of interactive tools and calculators built with Claude — each a self-contained React component hosted as a Claude artifact.
+A growing collection of interactive tools and calculators built with Claude — each a self-contained React component.
 
-The `index.html` at the root serves as a dashboard, hosted via GitHub Pages.
+The dashboard is a Vite + React app deployed automatically to GitHub Pages via GitHub Actions on every push to `main`.
 
 ## Live Site
 
@@ -14,17 +14,26 @@ The `index.html` at the root serves as a dashboard, hosted via GitHub Pages.
 |------|-------------|
 | [Bonvoy Points Calculator](bonvoy-calc.jsx) | Compare Marriott hotels by cents-per-point value to find the best redemption |
 
+## Development
+
+```bash
+npm install
+npm run dev      # local dev server
+npm run build    # production build → dist/
+```
+
 ## GitHub Pages Setup
 
 1. Push this repo to GitHub.
 2. Go to **Settings → Pages**.
-3. Under **Source**, select **Deploy from a branch**.
-4. Set branch to `main` and folder to `/ (root)`.
-5. Click **Save** — the site will be live at `https://<your-username>.github.io/claude-artifacts` within a minute.
+3. Under **Source**, select **GitHub Actions**.
+4. Push any commit to `main` — the Actions workflow builds and deploys automatically.
+
+The live URL will be `https://richgreenhoe.github.io/claude-artifacts`.
 
 ## Adding an Artifact
 
 1. Add the `.jsx` file to the repo root.
-2. Copy a `<a class="card">` block in `index.html` and update the icon, title, description, tags, and `href`.
+2. Add an entry to `src/artifacts.js`.
 3. Add a row to the table above.
-4. Commit and push — the dashboard updates automatically.
+4. Commit and push — the dashboard redeploys automatically.
