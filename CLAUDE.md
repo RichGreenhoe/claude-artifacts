@@ -4,22 +4,38 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Purpose
 
-This repo stores standalone React component artifacts — self-contained `.jsx` files designed to be run directly in Claude's artifact sandbox (no build step, no package.json, no bundler).
+A growing collection of Claude-built React components ("artifacts"), served through a Vite + React dashboard hosted on GitHub Pages. Each artifact is a standalone `.jsx` file at the repo root; the `src/` directory is the dashboard app that indexes and renders them.
+
+## Commands
+
+```bash
+npm install
+npm run dev      # http://localhost:5173/
+npm run build    # production build → dist/
+```
+
+Deployment is automatic via GitHub Actions on every push to `main`.
 
 ## Architecture
 
-Each `.jsx` file is a single-file React component that:
-- Uses `import { ... } from "react"` (available in the artifact runtime)
-- Exports a default component as its entry point
-- Carries all styles inline (via JS style objects or inline `style=` props) — no CSS files, no Tailwind, no CSS modules
-- Has no external dependencies beyond React itself
+### Dashboard (`src/`)
 
-### Current artifacts
+- **`src/artifacts.js`** — single source of truth for all artifact metadata (slug, title, description, icon, tags, lazy import). Add new artifacts here.
+- **`src/App.jsx`** — dashboard grid, renders a card per artifact using CSS Modules.
+- **`src/ArtifactPage.jsx`** — renders the artifact component at `/#/:slug` with a floating ← Dashboard nav pill.
+- **`src/main.jsx`** — `HashRouter` entry point. Hash routing is used so GitHub Pages static hosting requires no server config.
+- **`vite.config.js`** — base path is `/` in dev, `/claude-artifacts/` in production.
 
-- **`bonvoy-calc.jsx`** — Marriott Bonvoy points-vs-cash calculator. Compares hotel options by cents-per-point (CPP) value, renders a verdict table, and can export results as Markdown. State is local (no persistence).
+### Artifacts (repo root)
 
-## Development Notes
+Each `.jsx` file is a self-contained React component:
+- Exports a default component
+- Inline styles only (JS style objects) — no CSS files, no Tailwind, no CSS modules
+- No dependencies beyond React itself
+- State is local; no persistence
 
-These files are not meant to be run locally with a dev server. To test changes, paste the component into [claude.ai](https://claude.ai) and ask Claude to render it as an artifact, or use a sandbox like [StackBlitz](https://stackblitz.com) with a Vite + React template.
+### Adding an Artifact
 
-There are no lint, test, or build commands — keep it that way unless a project grows to need them.
+1. Add `my-artifact.jsx` to the repo root.
+2. Add an entry to `src/artifacts.js` with a `lazy(() => import("../my-artifact.jsx"))` component field.
+3. Commit and push — the dashboard redeploys automatically.
