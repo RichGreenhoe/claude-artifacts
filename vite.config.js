@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  base: "/claude-artifacts/",
+  base: process.env.NODE_ENV === "production" ? "/claude-artifacts/" : "/",
 });
